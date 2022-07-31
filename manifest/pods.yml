@@ -65,11 +65,9 @@ spec:
     - "-O"
     - "/work-dir/index.html"
     - http://info.cern.ch
-    volumeMounts:
-    - name: workdir
-      mountPath: "/work-dir"
 
-  # Configure a Pod to Use a Volume for Storage
+
+    # Configure a Pod to Use a Volume for Storage
     # The volumeMounts part must be placed under the section containers block
     volumeMounts:
     - name: redis-storage
@@ -101,13 +99,13 @@ spec:
       periodSeconds: 3
     
     # Define command execution probe
-    readinessProbe:
-      exec:
-        command:
-        - cat
-        - /tmp/healthy
-      initialDelaySeconds: 5
-      periodSeconds: 5
+    # readinessProbe:
+    #   exec:
+    #     command:
+    #     - cat
+    #     - /tmp/healthy
+    #   initialDelaySeconds: 5
+    #   periodSeconds: 5
 
     # Protect slow starting containers with startup probes
     startupProbe:
