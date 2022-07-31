@@ -33,6 +33,24 @@ spec:
           limits:
             cpu: "110m"
             memory: "200Mi"
+        # Configure a Pod to Use a ConfigMap
+        # https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/
+        envFrom:
+        - configMapRef:
+          name: special-config
+        # Use ConfigMap-defined environment variables in Pod commands
+        env:
+          - name: SPECIAL_LEVEL_KEY
+            valueFrom:
+              configMapKeyRef:
+                name: special-config
+                key: SPECIAL_LEVEL
+          - name: SPECIAL_TYPE_KEY
+            valueFrom:
+              configMapKeyRef:
+                name: special-config
+                key: SPECIAL_TYPE
+  
         # Configure Liveness, Readiness and Startup Probes
         # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
         # These blocks must be placed under containers block
